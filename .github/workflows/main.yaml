@@ -24,4 +24,4 @@ jobs:
           BRANCH: ${{ github.event.pull_request.head.ref }}
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python suggest_alt_text.py
+        run: python alt_text.py

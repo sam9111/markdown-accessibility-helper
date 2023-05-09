@@ -1,0 +1,41 @@
+name: Markdown Accessibility Helper
+description: Suggests alt text for images in markdown files
+branding:
+  icon: image
+  color: purple
+
+inputs:
+  clone_url:
+    description: The clone URL of the repository
+    required: false
+  branch:
+    description: The branch of the repository
+    required: false
+  github_actor:
+    description: The GitHub actor
+    required: true
+    default: ${{ github.actor }}
+  github_token:
+    description: The GitHub token
+    required: true
+    default: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  suggest_alt_text:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Suggest Alt Text
+        env:
+          CLONE_URL: ${{ inputs.clone_url }}
+          BRANCH: ${{ inputs.branch }}
+          GITHUB_ACTOR: ${{ inputs.github_actor }}
+          GITHUB_TOKEN: ${{ inputs.github_token }}
+        run: python alt_text.py
