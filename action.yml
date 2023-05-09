@@ -8,9 +8,11 @@ inputs:
   clone_url:
     description: The clone URL of the repository
     required: false
+    default: ${{ github.event.pull_request.head.repo.clone_url }}
   branch:
     description: The branch of the repository
     required: false
+    default: ${{ github.event.pull_request.head.ref }}
   github_actor:
     description: The GitHub actor
     required: true
