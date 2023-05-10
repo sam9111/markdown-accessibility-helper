@@ -8,7 +8,7 @@ inputs:
   github_token:
     description: The GitHub token
     required: true
-    default: ${{ secrets.GITHUB_TOKEN }}
+    default: ${{ github.token }}
 jobs:
   suggest_alt_text:
     runs-on: ubuntu-latest
