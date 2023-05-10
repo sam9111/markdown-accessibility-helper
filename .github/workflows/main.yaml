@@ -28,4 +28,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Suggest Alt Text
-        run: python alt_text.py ${{ github.event.pull_request.head.repo.clone_url }} ${{ github.event.pull_request.head.ref }}
+        run: python alt_text.py ${{secret.GITHUB_TOKEN}}
