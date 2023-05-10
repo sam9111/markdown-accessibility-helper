@@ -12,11 +12,14 @@ inputs:
 
 runs:
   using: "composite"
-  shell: bash
   steps:
     - name: Install Python
       uses: actions/setup-python@v2
-      run: pip install -r requirements.txt
+      run: |
+        pip install -r requirements.txt
+      shell: bash
 
     - name: Suggest Alt Text
-      run: python alt_text.py
+      run: |
+        python alt_text.py
+      shell: bash
