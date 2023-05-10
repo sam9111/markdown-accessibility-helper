@@ -17,4 +17,6 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Suggest Alt Text
-        run: python alt_text.py ${{secrets.GITHUB_TOKEN}}
+        run: python alt_text.py
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}

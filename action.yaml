@@ -4,12 +4,11 @@ branding:
   icon: image
   color: purple
 
-on:
-  workflow_dispatch:
-    inputs:
-      token:
-        description: "GitHub token"
-        required: true
+inputs:
+  token:
+    description: "GitHub token"
+    required: true
+    default: ${{ github.token }}
 
 jobs:
   suggest_alt_text:
@@ -26,5 +25,3 @@ jobs:
 
       - name: Suggest Alt Text
         run: python alt_text.py
-        env:
-          GITHUB_TOKEN: ${{ github.event.inputs.token }}
