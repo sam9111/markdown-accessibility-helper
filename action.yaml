@@ -20,7 +20,11 @@ runs:
       uses: actions/setup-python@v2
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        pip install -r requirements.txt
+      shell: bash
 
     - name: Suggest Alt Text
-      run: python alt_text.py
+      run: |
+        python alt_text.py
+      shell: bash
