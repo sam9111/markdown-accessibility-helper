@@ -3,6 +3,7 @@ import requests
 from PIL import Image
 import re
 import os
+import sys
 
 
 def suggest_alt_text(image_url):
@@ -34,14 +35,15 @@ def update_markdown_file(file_path):
 
 
 if __name__ == '__main__':
+
     repo = os.environ['GITHUB_REPOSITORY']
     repo_name = repo.split('/')[1]
     clone_url = f'https://github.com/{repo}.git'
 
-    if os.environ['CLONE_URL']:
+    if sys.argv[1]:
         clone_url = os.environ['CLONE_URL']
     branch = 'main'
-    if os.environ['BRANCH']:
+    if sys.argv[2]:
         branch = os.environ['BRANCH']
 
     os.system(f"git clone --depth=1 --branch={branch} {clone_url} repo")
