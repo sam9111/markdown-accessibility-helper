@@ -12,19 +12,11 @@ inputs:
 
 runs:
   using: "composite"
+  shell: bash
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     - name: Install Python
       uses: actions/setup-python@v2
-
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-      shell: bash
+      run: pip install -r requirements.txt
 
     - name: Suggest Alt Text
-      run: |
-        python alt_text.py
-      shell: bash
+      run: python alt_text.py
