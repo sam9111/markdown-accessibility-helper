@@ -2,11 +2,25 @@ name: Markdown Accessibility Helper
 
 on:
   push:
+    paths:
+      - "**/*.md"
     branches:
       - main
+
+   pull_request:
+    paths:
+      - "**/*.md"
+    types: [closed]
+    branches:
+      - main
+
+  workflow_dispatch:
+
 jobs:
   suggest_alt_text:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,4 +32,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Suggest Alt Text
-        run: python alt_text.py ${{ github.event.pull_request.head.repo.clone_url }} ${{ github.event.pull_request.head.ref }}
+        run: python alt_text.py ${{secret.GITHUB_TOKEN}}

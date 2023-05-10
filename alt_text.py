@@ -40,11 +40,10 @@ if __name__ == '__main__':
     repo_name = repo.split('/')[1]
     clone_url = f'https://github.com/{repo}.git'
 
-    if sys.argv[1]:
-        clone_url = os.environ['CLONE_URL']
-    branch = 'main'
-    if sys.argv[2]:
-        branch = os.environ['BRANCH']
+    branch = "main"
+
+    if os.environ['GITHUB_HEAD_REF']:
+        branch = os.environ['GITHUB_HEAD_REF']
 
     os.system(f"git clone --depth=1 --branch={branch} {clone_url} repo")
     os.chdir('repo')
@@ -60,6 +59,6 @@ if __name__ == '__main__':
         f'git config --global user.email "{github_username}@users.noreply.github.com"')
     os.system(f'git config --global user.name "{github_username}"')
     os.system('git commit -m "Suggest alt text for inline images"')
-    token = os.environ['GITHUB_TOKEN']
+    token = sys.argv[1]
     os.system(
         f"git push {clone_url.replace('https://',f'https://{github_username}:{token}@')} {branch}")
