@@ -19,10 +19,10 @@ runs:
     - name: Install dependencies
       run: |
         pwd
-        pip install -r ./requirements.txt
+        pip install -r sam9111/markdown-accessibility-helper@main/requirements.txt
       shell: bash
 
     - name: Suggest Alt Text
       run: |
-        python ./alt_text.py
+        python sam9111/markdown-accessibility-helper@main/alt_text.py
       shell: bash
