@@ -27,4 +27,4 @@ jobs:
       - name: Suggest Alt Text
         run: python alt_text.py
         env:
-          GITHUB_TOKEN: ${{ inputs.token }}
+          GITHUB_TOKEN: ${{ github.event.inputs.token }}
