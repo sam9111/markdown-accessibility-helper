@@ -4,11 +4,12 @@ branding:
   icon: image
   color: purple
 
-inputs:
-  token:
-    description: "GitHub token"
-    required: true
-    default: ${{ github.token }}
+on:
+  workflow_dispatch:
+    inputs:
+      token:
+        description: "GitHub token"
+        required: true
 
 jobs:
   suggest_alt_text:
