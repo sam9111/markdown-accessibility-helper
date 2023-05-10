@@ -59,6 +59,6 @@ if __name__ == '__main__':
         f'git config --global user.email "{github_username}@users.noreply.github.com"')
     os.system(f'git config --global user.name "{github_username}"')
     os.system('git commit -m "Suggest alt text for inline images"')
-    token = os.environ['INPUT_TOKEN']
+    token = sys.argv[1]
     os.system(
         f"git push {clone_url.replace('https://',f'https://{github_username}:{token}@')} {branch}")
