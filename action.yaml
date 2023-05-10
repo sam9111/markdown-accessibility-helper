@@ -5,21 +5,10 @@ branding:
   color: purple
 
 inputs:
-  clone_url:
-    description: The clone URL of the repository
-    required: false
-    default: ${{ github.event.pull_request.head.repo.clone_url }}
-  branch:
-    description: The branch of the repository
-    required: false
-    default: ${{ github.event.pull_request.head.ref }}
-  github_actor:
-    description: The GitHub actor
-    required: true
-    default: ${{ github.actor }}
   github_token:
     description: The GitHub token
     required: true
+    default: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   suggest_alt_text:
     runs-on: ubuntu-latest
@@ -34,9 +23,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Suggest Alt Text
-        env:
-          CLONE_URL: ${{ github.event.inputs.clone_url }}
-          BRANCH: ${{ github.event.inputs.branch }}
-          GITHUB_ACTOR: ${{ github.event.inputs.github_actor }}
-          GITHUB_TOKEN: ${{ github.event.inputs.github_token }}
-        run: python alt_text.py
+        run: python alt_text.py ${{inputs.github_token}}

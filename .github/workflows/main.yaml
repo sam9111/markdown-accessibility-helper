@@ -1,12 +1,6 @@
 name: Markdown Accessibility Helper
 
 on:
-  push:
-    paths:
-      - "**/*.md"
-    branches:
-      - main
-
   workflow_dispatch:
 
 jobs:
