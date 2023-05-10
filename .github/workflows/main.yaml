@@ -7,20 +7,11 @@ on:
     branches:
       - main
 
-   pull_request:
-    paths:
-      - "**/*.md"
-    types: [closed]
-    branches:
-      - main
-
   workflow_dispatch:
 
 jobs:
   suggest_alt_text:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
