@@ -18,10 +18,10 @@ runs:
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install -r sam9111/markdown-accessibility-helper/requirements.txt
       shell: bash
 
     - name: Suggest Alt Text
       run: |
-        python alt_text.py
+        python sam9111/markdown-accessibility-helper/alt_text.py
       shell: bash
