@@ -1,5 +1,9 @@
 name: Markdown Accessibility Helper
 
+on:
+  push:
+    branches:
+      - main
 jobs:
   suggest_alt_text:
     runs-on: ubuntu-latest
