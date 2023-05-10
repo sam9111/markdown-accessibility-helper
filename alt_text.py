@@ -41,10 +41,10 @@ if __name__ == '__main__':
     clone_url = f'https://github.com/{repo}.git'
 
     if sys.argv[1]:
-        clone_url = os.environ['CLONE_URL']
+        clone_url = sys.argv[1]
     branch = 'main'
     if sys.argv[2]:
-        branch = os.environ['BRANCH']
+        branch = sys.argv[2]
 
     os.system(f"git clone --depth=1 --branch={branch} {clone_url} repo")
     os.chdir('repo')
