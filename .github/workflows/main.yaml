@@ -2,8 +2,18 @@ name: Markdown Accessibility Helper
 
 on:
   push:
+    paths:
+      - "**.md"
     branches:
       - main
+
+  pull_request:
+    paths:
+      - "**.md"
+    types: [opened, synchronize, reopened]
+
+  workflow_dispatch:
+
 jobs:
   suggest_alt_text:
     runs-on: ubuntu-latest
