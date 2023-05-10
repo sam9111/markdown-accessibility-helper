@@ -10,18 +10,17 @@ inputs:
     required: true
     default: ${{ github.token }}
 
-jobs:
-  suggest_alt_text:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install Python
-        uses: actions/setup-python@v2
+    - name: Install Python
+      uses: actions/setup-python@v2
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+    - name: Install dependencies
+      run: pip install -r requirements.txt
 
-      - name: Suggest Alt Text
-        run: python alt_text.py
+    - name: Suggest Alt Text
+      run: python alt_text.py
