@@ -13,16 +13,18 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Install Python
       uses: actions/setup-python@v2
 
     - name: Install dependencies
       run: |
-        pwd
-        pip install -r sam9111/markdown-accessibility-helper@main/requirements.txt
+        pip install -r requirements.txt
       shell: bash
 
     - name: Suggest Alt Text
       run: |
-        python sam9111/markdown-accessibility-helper@main/alt_text.py
+        python alt_text.py
       shell: bash
