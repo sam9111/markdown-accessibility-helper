@@ -4,11 +4,6 @@ branding:
   icon: image
   color: purple
 
-inputs:
-  github_token:
-    description: The GitHub token
-    required: true
-    default: ${{ github.token }}
 jobs:
   suggest_alt_text:
     runs-on: ubuntu-latest
@@ -23,4 +18,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Suggest Alt Text
-        run: python alt_text.py ${{inputs.github_token}}
+        run: python alt_text.py ${{ github.token }}
