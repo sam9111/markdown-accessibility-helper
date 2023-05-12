@@ -63,6 +63,7 @@ def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
         matches += re.findall(r'<img.*?title="(.*?)".*?alt="(.*?)".*?>', content)
         matches += re.findall(r'<img.*?alt="(.*?)".*?>', content)
         matches += re.findall(r'<img.*?title="(.*?)".*?>', content)
+        matches += re.findall(r'<img.*?src="(.*?)".*?>', content)
 
         for match in matches:
             alt_text = match[0]
@@ -72,7 +73,7 @@ def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
                 suggested_alt_text = suggest_alt_text(
                     image_url, azure_subscription_key, azure_endpoint, language)
                 content = content.replace(
-                    f'<img src="{image_url}">', f'<img src="{image_url}" alt="{suggested_alt_text}">')
+                    f"<img.*?src=\"{image_url}\"", f"<img src=\"{image_url}\" alt=\"{suggested_alt_text}\" title=\"{suggested_alt_text}\">")
 
     with open(file_path, 'w') as f:
         f.write(content)
