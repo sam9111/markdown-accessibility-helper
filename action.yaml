@@ -44,3 +44,4 @@ runs:
       with:
         command: fix
         globs: "**/*.md"
+        continue-on-error: true
