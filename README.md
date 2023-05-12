@@ -10,7 +10,7 @@ A GitHub action that helps improve the accessibility of Markdown files in your r
 
 ## Usage
 
-> Action Permissions: This action requires read and write access to your repository to modify the markdown files. You can update the permissions for this action in the Actions tab of your repository settings under Workflows Permissions. This only needs to be done once per repository. The action will not be able to modify your repository if you do not grant it the required permissions. For more information, see [GitHub's documentation](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#permissions).
+> Action Permissions: This action requires read and write access to your repository to modify the markdown files. You can update the permissions for this action in the Actions tab of your repository settings under Workflows Permissions. This only needs to be done once per repository. The action will not be able to modify your repository if you do not grant it the required permissions. This action does not access any other files other than .md files in your repository. For more information, see [GitHub's documentation](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#permissions).
 
 To use the Markdown Accessibility Helper action in your repository, add the following YAML code to your workflow file (e.g. .github/workflows/markdown-accessibility-helper.yaml):
 
