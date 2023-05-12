@@ -36,5 +36,5 @@ runs:
 
     - name: Suggest Alt Text
       run: |
-        python ${{ github.action_path }}/alt_text.py ${{inputs.token}} ${{inputs.azure_key}} ${{inputs.azure_endpoint}}
+        python ${{ github.action_path }}/alt_text.py ${{inputs.token}} ${{inputs.azure_key}} ${{inputs.azure_endpoint}} ${{inputs.language}}
       shell: bash
