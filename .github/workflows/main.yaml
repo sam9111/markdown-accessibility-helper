@@ -14,3 +14,4 @@ jobs:
         with:
           azure_key: ${{ secrets.AZURE_KEY }}
           azure_endpoint: ${{ secrets.AZURE_ENDPOINT }}
+          language: "ja"
