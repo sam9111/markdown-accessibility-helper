@@ -2,7 +2,7 @@
 
 Image from the web:
 
-![カップに入っている犬](https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+![](https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
 
 Image from the repo:
 
