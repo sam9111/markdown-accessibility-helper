@@ -15,12 +15,13 @@ import sys
 # Suggest alt text for an image using the Microsoft GIT model
 
 
-def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint):
+def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint, language):
 
     if azure_subscription_key and azure_endpoint:
         computervision_client = ComputerVisionClient(
             azure_endpoint, CognitiveServicesCredentials(azure_subscription_key))
-        description_results = computervision_client.describe_image(image_url)
+        description_results = computervision_client.describe_image(
+            image_url, language)
         if (len(description_results.captions) == 0):
             pass
         else:
@@ -47,7 +48,7 @@ def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
             image_url = match[1]
             if not alt_text:
                 suggested_alt_text = suggest_alt_text(
-                    image_url, azure_subscription_key, azure_endpoint)
+                    image_url, azure_subscription_key, azure_endpoint, language)
                 content = content.replace(
                     f"![]({image_url})", f"![{suggested_alt_text}]({image_url})")
     with open(file_path, 'w') as f:
@@ -59,10 +60,12 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         azure_subscription_key = sys.argv[2]
         azure_endpoint = sys.argv[3]
+
     else:
         azure_subscription_key = None
         azure_endpoint = None
 
+    language = sys.argv[4]
     repo = os.environ['GITHUB_REPOSITORY']
     repo_name = repo.split('/')[1]
     clone_url = f'https://github.com/{repo}.git'
