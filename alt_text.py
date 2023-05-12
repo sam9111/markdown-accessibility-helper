@@ -57,23 +57,33 @@ def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
                     f"![]({image_url})", f"![{suggested_alt_text}]({image_url})")
 
         # match all img tags with empty alt or title attributes or no alt or title attributes
+        pattern = re.compile(r'<img.*?>', re.S)
 
-        matches = re.findall(
-            r'<img.*?alt="(.*?)".*?title="(.*?)".*?>', content)
-        matches += re.findall(r'<img.*?title="(.*?)".*?alt="(.*?)".*?>', content)
-        matches += re.findall(r'<img.*?alt="(.*?)".*?>', content)
-        matches += re.findall(r'<img.*?title="(.*?)".*?>', content)
-        matches += re.findall(r'<img.*?src="(.*?)".*?>', content)
+        result = pattern.findall(content)
 
-        for match in matches:
-            alt_text = match[0]
-            title_text = match[1]
-            if not alt_text and not title_text:
-                image_url = re.findall(r'<img.*?src="(.*?)".*?>', content)[0]
-                suggested_alt_text = suggest_alt_text(
+        for i in result:
+
+            image_url = re.findall(r'src="(.*?)"', i)[0]
+
+            # check if valid alt value is provided
+
+            alt = re.findall(r'alt="(.*?)"', i)
+            if alt:
+                alt = alt[0]
+            title = re.findall(r'title="(.*?)"', i)
+            if title:
+                title = title[0]
+
+            # check if the img tag has empty alt or title attribute
+
+            if 'alt=""' in i or 'title=""' or 'alt' not in i or 'title' not in i:
+
+                suggested_alt_text = alt if alt else suggest_alt_text(
                     image_url, azure_subscription_key, azure_endpoint, language)
+
+                title = title if title else suggested_alt_text
                 content = content.replace(
-                    f"<img.*?src=\"{image_url}\"", f"<img src=\"{image_url}\" alt=\"{suggested_alt_text}\" title=\"{suggested_alt_text}\">")
+                    f"{i}", f'<img src="{image_url}" alt="{suggested_alt_text}" title="{suggested_alt_text}">')
 
     with open(file_path, 'w') as f:
         f.write(content)
