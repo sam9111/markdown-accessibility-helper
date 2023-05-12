@@ -20,11 +20,11 @@ def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint):
     if azure_subscription_key and azure_endpoint:
         computervision_client = ComputerVisionClient(
             azure_endpoint, CognitiveServicesCredentials(azure_subscription_key))
-    description_results = computervision_client.describe_image(image_url)
-    if (len(description_results.captions) == 0):
-        pass
-    else:
-        return description_results.captions[0].text
+        description_results = computervision_client.describe_image(image_url)
+        if (len(description_results.captions) == 0):
+            pass
+        else:
+            return description_results.captions[0].text
 
     processor = AutoProcessor.from_pretrained("microsoft/git-base-coco")
     model = AutoModelForCausalLM.from_pretrained("microsoft/git-base-coco")
