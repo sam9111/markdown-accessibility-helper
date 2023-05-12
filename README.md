@@ -35,5 +35,5 @@ jobs:
           # Azure Computer Vision Resource Endpoint (optional)
           azure_endpoint: ${{ secrets.AZURE_ENDPOINT }}
           # Language to use for alt text generation with Azure Computer Vision Resource (optional)
-          language: "en"
+          language: 'en'|'es'|'ja'|'pt'|'zh'
 ```
