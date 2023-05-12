@@ -21,7 +21,7 @@ def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint, language
         computervision_client = ComputerVisionClient(
             azure_endpoint, CognitiveServicesCredentials(azure_subscription_key))
         description_results = computervision_client.describe_image(
-            image_url, language)
+            image_url, language=language)
         if (len(description_results.captions) == 0):
             pass
         else:
