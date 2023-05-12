@@ -42,7 +42,11 @@ def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint, language
 def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
     with open(file_path, 'r') as f:
         content = f.read()
+
+        # match all markdown images with empty alt text
+
         matches = re.findall(r'\!\[(.*?)\]\((.*?)\)(?!\(|\w)', content)
+
         for match in matches:
             alt_text = match[0]
             image_url = match[1]
@@ -51,6 +55,25 @@ def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
                     image_url, azure_subscription_key, azure_endpoint, language)
                 content = content.replace(
                     f"![]({image_url})", f"![{suggested_alt_text}]({image_url})")
+
+        # match all img tags with empty alt or title attributes or no alt or title attributes
+
+        matches = re.findall(
+            r'<img.*?alt="(.*?)".*?title="(.*?)".*?>', content)
+        matches += re.findall(r'<img.*?title="(.*?)".*?alt="(.*?)".*?>', content)
+        matches += re.findall(r'<img.*?alt="(.*?)".*?>', content)
+        matches += re.findall(r'<img.*?title="(.*?)".*?>', content)
+
+        for match in matches:
+            alt_text = match[0]
+            title_text = match[1]
+            if not alt_text and not title_text:
+                image_url = re.findall(r'<img.*?src="(.*?)".*?>', content)[0]
+                suggested_alt_text = suggest_alt_text(
+                    image_url, azure_subscription_key, azure_endpoint, language)
+                content = content.replace(
+                    f'<img src="{image_url}">', f'<img src="{image_url}" alt="{suggested_alt_text}">')
+
     with open(file_path, 'w') as f:
         f.write(content)
 
