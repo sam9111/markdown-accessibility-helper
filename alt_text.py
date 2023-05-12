@@ -5,9 +5,27 @@ import re
 import os
 import sys
 
+from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from msrest.authentication import CognitiveServicesCredentials
+
+from PIL import Image
+import sys
+
+
 # Suggest alt text for an image using the Microsoft GIT model
 
-def suggest_alt_text(image_url):
+
+def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint):
+
+    if azure_subscription_key and azure_endpoint:
+        computervision_client = ComputerVisionClient(
+            azure_endpoint, CognitiveServicesCredentials(azure_subscription_key))
+    description_results = computervision_client.describe_image(image_url)
+    if (len(description_results.captions) == 0):
+        pass
+    else:
+        return description_results.captions[0].text
+
     processor = AutoProcessor.from_pretrained("microsoft/git-base-coco")
     model = AutoModelForCausalLM.from_pretrained("microsoft/git-base-coco")
     image = Image.open(requests.get(image_url, stream=True).raw)
@@ -19,7 +37,8 @@ def suggest_alt_text(image_url):
 
 # Update all markdown files with the suggested alt text if no alt text is provided
 
-def update_markdown_file(file_path):
+
+def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
     with open(file_path, 'r') as f:
         content = f.read()
         matches = re.findall(r'\!\[(.*?)\]\((.*?)\)(?!\(|\w)', content)
@@ -27,7 +46,8 @@ def update_markdown_file(file_path):
             alt_text = match[0]
             image_url = match[1]
             if not alt_text:
-                suggested_alt_text = suggest_alt_text(image_url)
+                suggested_alt_text = suggest_alt_text(
+                    image_url, azure_subscription_key, azure_endpoint)
                 content = content.replace(
                     f"![]({image_url})", f"![{suggested_alt_text}]({image_url})")
     with open(file_path, 'w') as f:
@@ -35,6 +55,9 @@ def update_markdown_file(file_path):
 
 
 if __name__ == '__main__':
+
+    azure_subscription_key = sys.argv[2]
+    azure_endpoint = sys.argv[3]
 
     repo = os.environ['GITHUB_REPOSITORY']
     repo_name = repo.split('/')[1]
@@ -50,7 +73,8 @@ if __name__ == '__main__':
 
     for filename in os.listdir('.'):
         if filename.endswith('.md'):
-            update_markdown_file(filename)
+            update_markdown_file(
+                filename, azure_subscription_key, azure_endpoint)
             os.system(f"git add {filename}")
 
     # Commit and push

@@ -10,6 +10,16 @@ inputs:
     required: true
     default: ${{ github.token }}
 
+  azure_key:
+    description: "Azure Computer Vision API key"
+    required: true
+    default: ${{ secrets.AZURE_KEY }}
+
+  azure_endpoint:
+    description: "Azure Computer Vision API endpoint"
+    required: true
+    default: ${{ secrets.AZURE_ENDPOINT }}
+
 runs:
   using: "composite"
   steps:
@@ -23,5 +33,5 @@ runs:
 
     - name: Suggest Alt Text
       run: |
-        python ${{ github.action_path }}/alt_text.py ${{inputs.token}}
+        python ${{ github.action_path }}/alt_text.py ${{inputs.token}} ${{inputs.azure_key}} ${{inputs.azure_endpoint}}
       shell: bash

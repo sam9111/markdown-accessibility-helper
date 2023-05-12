@@ -2,3 +2,4 @@ requests
 torch
 transformers
 pillow
+azure-cognitiveservices-vision-computervision
