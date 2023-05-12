@@ -1,9 +1,13 @@
-# Test Markdown File
+# Test Markdown File for Alt Text Suggestions
 
-![a dog in a bowl of food](https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+Image from the web:
 
-![un perro parado en dos patas](https://github.com/sam9111/markdown-accessibility-helper/blob/main/puppy.jpeg?raw=true)
+![](https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
 
-<img src="https://www.rd.com/wp-content/uploads/2018/02/04_Adorable-Puppy-Pictures-that-Will-Make-You-Melt_361302206_Grigorita-Ko.jpg?fit=700,467" alt="un par de osos de peluche" title="un par de osos de peluche">
+Image from the repo:
 
-<img src="https://cdn.royalcanin-weshare-online.io/UCImMmgBaxEApS7LuQnZ/v2/eukanuba-market-image-puppy-beagle?w=5596&h=2317&rect=574,77,1850,1045&auto=compress,enhance" alt="un perro con un frisbee en el pasto" title="un perro con un frisbee en el pasto">
+![](https://github.com/sam9111/markdown-accessibility-helper/blob/main/puppy.jpeg?raw=true)
+
+Image declared in HTML:
+
+<img src="https://www.rd.com/wp-content/uploads/2018/02/04_Adorable-Puppy-Pictures-that-Will-Make-You-Melt_361302206_Grigorita-Ko.jpg?fit=700,467" alt="" title="">
