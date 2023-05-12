@@ -2,11 +2,11 @@
 
 Image from the web:
 
-![](https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+![puppy in a bowl on the grass](https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
 
 Image from the repo:
 
-![](https://github.com/sam9111/markdown-accessibility-helper/blob/main/puppy.jpeg?raw=true)
+![a puppy eating food from a bowl on the floor.](https://github.com/sam9111/markdown-accessibility-helper/blob/main/puppy.jpeg?raw=true)
 
 Image declared in HTML:
 
