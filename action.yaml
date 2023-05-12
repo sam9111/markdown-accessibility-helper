@@ -38,3 +38,9 @@ runs:
       run: |
         python ${{ github.action_path }}/alt_text.py ${{inputs.token}} ${{inputs.azure_key}} ${{inputs.azure_endpoint}} ${{inputs.language}}
       shell: bash
+
+    - name: Run markdownlint and fix errors
+      uses: DavidAnson/markdownlint-cli2-action@v10
+      with:
+        command: fix
+        globs: "**/*.md"
