@@ -12,11 +12,13 @@ inputs:
 
   azure_key:
     description: "Azure Computer Vision API key"
-    required: false
+    required: true
+    default: ""
 
   azure_endpoint:
     description: "Azure Computer Vision API endpoint"
-    required: false
+    required: true
+    default: ""
 
   language:
     description: "Language to use for alt text suggestions"
