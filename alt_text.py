@@ -94,12 +94,14 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         azure_subscription_key = sys.argv[2]
         azure_endpoint = sys.argv[3]
+        if len(sys.argv) > 4:
+            language = sys.argv[4]
 
     else:
         azure_subscription_key = None
         azure_endpoint = None
+        language = "en"
 
-    language = sys.argv[4]
     repo = os.environ['GITHUB_REPOSITORY']
     repo_name = repo.split('/')[1]
     clone_url = f'https://github.com/{repo}.git'
