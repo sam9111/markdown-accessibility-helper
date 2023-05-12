@@ -1,6 +1,6 @@
 # Markdown Accessibility Helper
 
-A GitHub action that helps improve the accessibility of Markdown files in your repository by automatically adding alternative text to images that do not have it. This action uses the [microsoft/git-base-coco](https://huggingface.co/microsoft/git-base-coco) model from HuggingFace to generate alt text by default, or the describe image ability of [Azure Computer Vision Resource](https://azure.microsoft.com/en-us/products/cognitive-services/vision-services) can also be used.
+A GitHub action that helps improve the accessibility of Markdown files in your repository by automatically adding alternative text to images that do not have it.
 
 ## Features
 
@@ -10,6 +10,8 @@ A GitHub action that helps improve the accessibility of Markdown files in your r
 - Using the Azure Computer Vision Resource, you can specify a language for alt text generation. Supported languages: en - English (Default), es - Spanish, ja - Japanese, pt - Portuguese, zh - Simplified Chinese.
 
 ## Usage
+
+> Action Permissions: This action requires read and write access to your repository to modify the markdown files. You can update the permissions for this action in the Actions tab of your repository settings under Workflows Permissions. This only needs to be done once per repository. The action will not be able to modify your repository if you do not grant it the required permissions. For more information, see [GitHub's documentation](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#permissions).
 
 To use the Markdown Accessibility Helper action in your repository, add the following YAML code to your workflow file (e.g. .github/workflows/markdown-accessibility-helper.yaml):
 
@@ -30,12 +32,13 @@ jobs:
 
 According to this workflow file, you can run the action manually by going to the Actions tab in your repository and selecting the Markdown Accessibility Helper workflow.
 
+By default, the action uses the [microsoft/git-base-coco](https://huggingface.co/microsoft/git-base-coco) model from HuggingFace to generate alt text and does not require any additional configuration. You can also use the Azure Computer Vision Resource to generate alt text by following the instructions below.
+
 ### With Azure Computer Vision Resource
 
 ```yaml
 name: Markdown Accessibility Helper
 
-# Runs only when triggered manually. You can also trigger this action on a schedule or on push or pull request events by changing the on section.
 on:
   workflow_dispatch:
 
@@ -46,9 +49,9 @@ jobs:
       - name: Markdown Accessibility
         uses: sam9111/markdown-accessibility-helper@v1.0.2
         with:
-          # Azure Computer Vision Resource Key (optional)
+          # Azure Computer Vision Resource Key
           azure_key: ${{ secrets.AZURE_KEY }}
-          # Azure Computer Vision Resource Endpoint (optional)
+          # Azure Computer Vision Resource Endpoint
           azure_endpoint: ${{ secrets.AZURE_ENDPOINT }}
           # Language to use for alt text generation with Azure Computer Vision Resource (optional)
           language: 'en'|'es'|'ja'|'pt'|'zh'
@@ -61,3 +64,10 @@ Add your Azure key and endpoint to your repository secrets.
 In the with section of your workflow file, you can provide your Azure endpoint and key as secrets to access the Azure Computer Vision Resource.
 
 You can also specify another language for alt text generation with the language parameter. The default language is English.
+
+## Future Plans
+
+- [ ] Use [markdownlint](https://github.com/DavidAnson/markdownlint) to check and fix other linting issues in markdown files.
+- [ ] Add support for other image formats like SVG.
+- [ ] Add support for other languages for alt text generation using other models.
+- [ ] Follow other suggestions given in this [link](https://www.smashingmagazine.com/2021/09/improving-accessibility-of-markdown/) for accessibility improvements in markdown files.

@@ -3,9 +3,7 @@ name: My Workflow
 # Runs only when triggered manually
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build:
