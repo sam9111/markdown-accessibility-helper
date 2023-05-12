@@ -5,6 +5,7 @@ import re
 import os
 import sys
 
+# Suggest alt text for an image using the Microsoft GIT model
 
 def suggest_alt_text(image_url):
     processor = AutoProcessor.from_pretrained("microsoft/git-base-coco")
@@ -16,8 +17,7 @@ def suggest_alt_text(image_url):
         generated_ids, skip_special_tokens=True)[0]
     return suggested_alt_text
 
-# Update the markdown file with the suggested alt text
-
+# Update all markdown files with the suggested alt text if no alt text is provided
 
 def update_markdown_file(file_path):
     with open(file_path, 'r') as f:
@@ -53,7 +53,8 @@ if __name__ == '__main__':
             update_markdown_file(filename)
             os.system(f"git add {filename}")
 
-    # Commit and push changes
+    # Commit and push
+
     github_username = os.environ['GITHUB_ACTOR']
     os.system(
         f'git config --global user.email "{github_username}@users.noreply.github.com"')

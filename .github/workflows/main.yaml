@@ -1,19 +1,13 @@
-name: Markdown Accessibility Helper
+name: My Workflow
+
+# Runs only when triggered manually
 
 on:
   workflow_dispatch:
 
 jobs:
-  suggest_alt_text:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Python
-        uses: actions/setup-python@v2
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Suggest Alt Text
-        run: python alt_text.py
-        with:
-          token: ${{secrets.GITHUB_TOKEN}}
+      - name: Markdown Accessibility
+        uses: sam9111/markdown-accessibility-helper@v1.0.1
