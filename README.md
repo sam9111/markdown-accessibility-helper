@@ -57,7 +57,7 @@ jobs:
           language: 'en'|'es'|'ja'|'pt'|'zh'
 ```
 
-With your Azure subscription, create a Computer Vision resource in the Azure portal to get your key and endpoint. You can use the free pricing tier (F0) which gives you 5,000 transactions free per month to try the service, and upgrade later to a paid tier if needed.
+With your Azure subscription, create a [Computer Vision resource](https://azure.microsoft.com/en-us/products/cognitive-services/vision-services) in the Azure portal to get your key and endpoint. You can use the free pricing tier (F0) which gives you 5,000 transactions free per month to try the service, and upgrade later to a paid tier if needed.
 
 Add your Azure key and endpoint to your repository secrets.
 
