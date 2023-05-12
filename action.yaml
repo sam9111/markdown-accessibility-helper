@@ -13,12 +13,10 @@ inputs:
   azure_key:
     description: "Azure Computer Vision API key"
     required: true
-    default: ${{ secrets.AZURE_KEY }}
 
   azure_endpoint:
     description: "Azure Computer Vision API endpoint"
     required: true
-    default: ${{ secrets.AZURE_ENDPOINT }}
 
 runs:
   using: "composite"
