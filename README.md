@@ -6,7 +6,6 @@ A GitHub action that helps improve the accessibility of Markdown files in your r
 
 - Automatically adds alternative text to images in all markdown files that do not have it.
 - Supports both PNG and JPEG image formats.
-- Supports both local and remote images.
 - Using the Azure Computer Vision Resource, you can specify a language for alt text generation. Supported languages: en - English (Default), es - Spanish, ja - Japanese, pt - Portuguese, zh - Simplified Chinese.
 
 ## Usage
