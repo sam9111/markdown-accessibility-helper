@@ -4,10 +4,9 @@ from PIL import Image
 import re
 import os
 import sys
-
+import io
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from msrest.authentication import CognitiveServicesCredentials
-
 from PIL import Image
 import sys
 
@@ -29,8 +28,13 @@ def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint, language
 
     processor = AutoProcessor.from_pretrained("microsoft/git-base-coco")
     model = AutoModelForCausalLM.from_pretrained("microsoft/git-base-coco")
-    image = Image.open(requests.get(image_url, stream=True, headers={
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}).raw)
+    try:
+        response = requests.get(image_url, stream=True, headers={
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'})
+        image = Image.open(io.BytesIO(response.content))
+    except:
+        print(f"Error: {image_url} is not a valid image URL")
+        return None
     pixel_values = processor(images=image, return_tensors="pt").pixel_values
     generated_ids = model.generate(pixel_values=pixel_values, max_length=50)
     suggested_alt_text = processor.batch_decode(
