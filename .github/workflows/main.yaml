@@ -11,7 +11,3 @@ jobs:
     steps:
       - name: Markdown Accessibility
         uses: sam9111/markdown-accessibility-helper@main
-        with:
-          azure_key: ${{ secrets.AZURE_KEY }}
-          azure_endpoint: ${{ secrets.AZURE_ENDPOINT }}
-          language: "ja"
