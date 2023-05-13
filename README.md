@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Markdown Accessibility
-        uses: sam9111/markdown-accessibility-helper@v1.0.2
+        uses: sam9111/markdown-accessibility-helper@v1.0.3
 ```
 
 According to this workflow file, you can run the action manually by going to the Actions tab in your repository and selecting the Markdown Accessibility Helper workflow.
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Markdown Accessibility
-        uses: sam9111/markdown-accessibility-helper@v1.0.2
+        uses: sam9111/markdown-accessibility-helper@v1.0.3
         with:
           # Azure Computer Vision Resource Key
           azure_key: ${{ secrets.AZURE_KEY }}
