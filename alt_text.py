@@ -91,6 +91,7 @@ def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
 
 if __name__ == '__main__':
 
+    language = "en"
     if len(sys.argv) > 2:
         azure_subscription_key = sys.argv[2]
         azure_endpoint = sys.argv[3]
@@ -100,7 +101,6 @@ if __name__ == '__main__':
     else:
         azure_subscription_key = None
         azure_endpoint = None
-        language = "en"
 
     repo = os.environ['GITHUB_REPOSITORY']
     repo_name = repo.split('/')[1]
