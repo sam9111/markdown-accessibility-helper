@@ -9,7 +9,7 @@ def has_image_without_alt(file_path):
 
         # Match all markdown images with empty alt text
         matches = re.findall(r'\!\[(.*?)\]\((.*?)\)(?!\(|\w)', content)
-
+        print(matches)
         for match in matches:
             alt_text = match[0]
             if not alt_text:
@@ -39,6 +39,7 @@ if __name__ == '__main__':
         for filename in files:
             if filename.endswith('.md'):
                 file_path = os.path.join(root, filename)
+                print(f'Checking {file_path}')
                 if has_image_without_alt(file_path):
                     md_files_without_alt.append(file_path)
 
