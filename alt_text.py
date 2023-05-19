@@ -44,7 +44,7 @@ def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint, language
 # Update all markdown files with the suggested alt text if no alt text is provided
 
 
-def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
+def update_markdown_file(file_path, azure_subscription_key, azure_endpoint, language):
     with open(file_path, 'r') as f:
         content = f.read()
 
@@ -107,31 +107,11 @@ if __name__ == '__main__':
         azure_subscription_key = None
         azure_endpoint = None
 
-    repo = os.environ['GITHUB_REPOSITORY']
-    repo_name = repo.split('/')[1]
-    clone_url = f'https://github.com/{repo}.git'
+    repo_path = sys.argv[1]
 
-    branch = "main"
-
-    if os.environ['GITHUB_HEAD_REF']:
-        branch = os.environ['GITHUB_HEAD_REF']
-
-    os.system(f"git clone --depth=1 --branch={branch} {clone_url} repo")
-    os.chdir('repo')
-
-    for filename in os.listdir('.'):
-        if filename.endswith('.md'):
-            update_markdown_file(
-                filename, azure_subscription_key, azure_endpoint)
-            os.system(f"git add {filename}")
-
-    # Commit and push
-
-    github_username = os.environ['GITHUB_ACTOR']
-    os.system(
-        f'git config --global user.email "{github_username}@users.noreply.github.com"')
-    os.system(f'git config --global user.name "{github_username}"')
-    os.system('git commit -m "Suggest alt text for inline images"')
-    token = sys.argv[1]
-    os.system(
-        f"git push {clone_url.replace('https://',f'https://{github_username}:{token}@')} {branch}")
+    for root, dirs, files in os.walk(repo_path):
+        for filename in files:
+            if filename.endswith('.md'):
+                file_path = os.path.join(root, filename)
+                update_markdown_file(
+                    file_path, azure_subscription_key, azure_endpoint, language)

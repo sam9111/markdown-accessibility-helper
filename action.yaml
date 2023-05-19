@@ -5,11 +5,6 @@ branding:
   color: purple
 
 inputs:
-  token:
-    description: "GitHub token"
-    required: true
-    default: ${{ github.token }}
-
   azure_key:
     description: "Azure Computer Vision API key"
     required: false
@@ -25,15 +20,37 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
     - name: Install Python
       uses: actions/setup-python@v2
 
+    - name: Check Alt Text
+      id: alt_text_checker
+      run: |
+        python ${{ github.action_path }}/alt_text_checker.py ${{ github.workspace }}
+      shell: bash
+
     - name: Install dependencies
+      if: steps.alt_text_checker.outputs.result == 'true'
       run: |
         pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash
 
     - name: Suggest Alt Text
+      if: steps.alt_text_checker.outputs.result == 'true'
       run: |
-        python ${{ github.action_path }}/alt_text.py ${{inputs.token}} ${{inputs.azure_key}} ${{inputs.azure_endpoint}} ${{inputs.language}}
+        python ${{ github.action_path }}/alt_text.py ${{ github.workspace }} ${{inputs.azure_key}} ${{inputs.azure_endpoint}} ${{inputs.language}}
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "Suggest alt text for images"
+        git push
       shell: bash
+
+    - uses: DavidAnson/markdownlint-cli2-action@v10
+      continue-on-error: true
+      with:
+        command: fix
+        globs: "**/*.md"

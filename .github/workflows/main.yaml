@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Markdown Accessibility
-        uses: sam9111/markdown-accessibility-helper@main
+        uses: sam9111/markdown-accessibility-helper@test-lint
