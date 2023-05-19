@@ -28,9 +28,11 @@ def has_image_without_alt(file_path):
 
 if __name__ == '__main__':
 
+    repo_path = sys.argv[1]
+
     md_files_without_alt = []
 
-    for root, dirs, files in os.walk(os.curdir):
+    for root, dirs, files in os.walk(repo_path):
         print(f'Checking {root}')
         for filename in files:
             print(f'Checking {filename}')

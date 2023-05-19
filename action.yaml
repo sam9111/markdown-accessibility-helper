@@ -25,13 +25,16 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
     - name: Install Python
       uses: actions/setup-python@v2
 
     - name: Check Alt Text
       id: alt_text_checker
       run: |
-        python ${{ github.action_path }}/alt_text_checker.py
+        python ${{ github.action_path }}/alt_text_checker.py ${{ github.workspace }}
       shell: bash
 
     - name: Install dependencies
