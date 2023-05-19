@@ -44,7 +44,7 @@ def suggest_alt_text(image_url, azure_subscription_key, azure_endpoint, language
 # Update all markdown files with the suggested alt text if no alt text is provided
 
 
-def update_markdown_file(file_path, azure_subscription_key, azure_endpoint):
+def update_markdown_file(file_path, azure_subscription_key, azure_endpoint, language):
     with open(file_path, 'r') as f:
         content = f.read()
 
@@ -114,4 +114,4 @@ if __name__ == '__main__':
             if filename.endswith('.md'):
                 file_path = os.path.join(root, filename)
                 update_markdown_file(
-                    filename, azure_subscription_key, azure_endpoint)
+                    filename, azure_subscription_key, azure_endpoint, language)
