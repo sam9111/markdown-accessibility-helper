@@ -31,7 +31,7 @@ runs:
     - name: Check Alt Text
       id: alt_text_checker
       run: |
-        python alt_text_checker.py
+        python ${{ github.action_path }}/alt_text_checker.py
       shell: bash
 
     - name: Install dependencies
