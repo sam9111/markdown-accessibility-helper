@@ -5,8 +5,10 @@ A GitHub action that helps improve the accessibility of Markdown files in your r
 ## Features
 
 - Automatically adds alternative text to images in all markdown files that do not have it.
+- Recursively searches through all markdown files in all folders.
 - Supports both PNG and JPEG image formats.
 - Using the Azure Computer Vision Resource, you can specify a language for alt text generation. Supported languages: en - English (Default), es - Spanish, ja - Japanese, pt - Portuguese, zh - Simplified Chinese.
+- The [markdownlint-cli2-action](https://github.com/DavidAnson/markdownlint-cli2-action) runs each time to lint all the markdown files and fix errors if possible.
 
 ## Usage
 
