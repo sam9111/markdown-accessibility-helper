@@ -37,11 +37,11 @@ runs:
     - name: Install dependencies
       if: steps.alt_text_checker.outputs.result == 'true'
       run: |
-        echo "Step 2 is running because Step 1 output is 'true'"
         pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash
 
     - name: Suggest Alt Text
+      if: steps.alt_text_checker.outputs.result == 'true'
       run: |
         python ${{ github.action_path }}/alt_text.py ${{inputs.token}} ${{inputs.azure_key}} ${{inputs.azure_endpoint}} ${{inputs.language}}
       shell: bash
