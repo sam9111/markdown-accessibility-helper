@@ -5,11 +5,6 @@ branding:
   color: purple
 
 inputs:
-  token:
-    description: "GitHub token"
-    required: true
-    default: ${{ github.token }}
-
   azure_key:
     description: "Azure Computer Vision API key"
     required: false
@@ -46,7 +41,7 @@ runs:
     - name: Suggest Alt Text
       if: steps.alt_text_checker.outputs.result == 'true'
       run: |
-        python ${{ github.action_path }}/alt_text.py ${{inputs.token}} ${{inputs.azure_key}} ${{inputs.azure_endpoint}} ${{inputs.language}}
+        python ${{ github.action_path }}/alt_text.py ${{ github.workspace }} ${{inputs.azure_key}} ${{inputs.azure_endpoint}} ${{inputs.language}}
       shell: bash
 
     - uses: DavidAnson/markdownlint-cli2-action@v10
