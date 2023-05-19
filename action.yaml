@@ -35,7 +35,9 @@ runs:
       shell: bash
 
     - name: Install dependencies
+      if: steps.alt_text_checker.outputs.result == 'true'
       run: |
+        echo "Step 2 is running because Step 1 output is 'true'"
         pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash
 
