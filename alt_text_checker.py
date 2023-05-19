@@ -35,20 +35,22 @@ if __name__ == '__main__':
 
     md_files_without_alt = []
 
-    for filename in os.listdir(directory):
-        if filename.endswith('.md'):
-            file_path = os.path.join(directory, filename)
-            if has_image_without_alt(file_path):
-                md_files_without_alt.append(filename)
+    for root, dirs, files in os.walk(directory):
+        for filename in files:
+            if filename.endswith('.md'):
+                file_path = os.path.join(root, filename)
+                if has_image_without_alt(file_path):
+                    md_files_without_alt.append(file_path)
 
     if md_files_without_alt:
         print("The following Markdown files contain images without alt text:")
-        for filename in md_files_without_alt:
-            print(filename)
+        for file_path in md_files_without_alt:
+            print(file_path)
 
         result = 'true'
     else:
         print("All Markdown files have alt text for their images.")
         result = 'false'
 
-    print(f"::set-output name=result::{result}")
+    with open(os.environ['GITHUB_OUTPUT'], 'w') as output_file:
+        output_file.write(f'result={result}\n')
