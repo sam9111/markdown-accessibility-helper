@@ -28,6 +28,12 @@ runs:
     - name: Install Python
       uses: actions/setup-python@v2
 
+    - name: Check Alt Text
+      id: alt_text_checker
+      run: |
+        python alt_text_checker.py
+      shell: bash
+
     - name: Install dependencies
       run: |
         pip install -r ${{ github.action_path }}/requirements.txt
