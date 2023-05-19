@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     md_files_without_alt = []
 
-    for root, dirs, files in os.walk('.'):
+    for root, dirs, files in os.walk('./'):
         print(f'Checking {root}')
         for filename in files:
             print(f'Checking {filename}')
