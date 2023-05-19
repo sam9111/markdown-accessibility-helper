@@ -110,11 +110,8 @@ if __name__ == '__main__':
     repo_path = sys.argv[1]
 
     for root, dirs, files in os.walk(repo_path):
-        print(f'Checking {root}')
         for filename in files:
-            print(f'Checking {filename}')
             if filename.endswith('.md'):
                 file_path = os.path.join(root, filename)
-                print(f'Checking {file_path}')
                 update_markdown_file(
                     filename, azure_subscription_key, azure_endpoint)
