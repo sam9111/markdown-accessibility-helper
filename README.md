@@ -68,7 +68,6 @@ You can also specify another language for alt text generation with the language 
 
 ## Future Plans
 
-- [ ] Use [markdownlint](https://github.com/DavidAnson/markdownlint) to check and fix other linting issues in markdown files.
 - [ ] Add support for other image formats like SVG.
 - [ ] Add support for other languages for alt text generation using other models.
 - [ ] Follow other suggestions given in this [link](https://www.smashingmagazine.com/2021/09/improving-accessibility-of-markdown/) for accessibility improvements in markdown files.
