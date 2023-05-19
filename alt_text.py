@@ -114,4 +114,4 @@ if __name__ == '__main__':
             if filename.endswith('.md'):
                 file_path = os.path.join(root, filename)
                 update_markdown_file(
-                    filename, azure_subscription_key, azure_endpoint, language)
+                    file_path, azure_subscription_key, azure_endpoint, language)
