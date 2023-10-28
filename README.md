@@ -1,6 +1,18 @@
 # Markdown Accessibility Helper
 
+**Winner of [Microsoft Code; Without Barriers Hackathon 2023](https://devpost.com/software/markdown-accessibility-helper)**
+
+
 A GitHub action that helps improve the accessibility of Markdown files in your repository by automatically adding alternative text to images that do not have it.
+
+<div>
+    <a href="https://www.loom.com/share/8eda48ae676849959e4fc636f6879fc7">
+      <p>GitHub + DEV 2023 Hackathon - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/8eda48ae676849959e4fc636f6879fc7">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/8eda48ae676849959e4fc636f6879fc7-1684496353225-with-play.gif">
+    </a>
+  </div>
 
 ## Features
 
